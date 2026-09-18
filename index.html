@@ -518,17 +518,181 @@
     max-width:520px;
   }
 
+  /* ---------- DISCLAIMER ---------- */
+  .disclaimer-btn{
+    position:fixed;
+    top:14px; right:14px;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.04em;
+    color:var(--cream);
+    background:linear-gradient(180deg, #55402b, #3a2c1c);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:20px;
+    padding:8px 14px;
+    cursor:pointer;
+    box-shadow:0 3px 0 var(--wood-dark), inset 0 1px 0 rgba(255,255,255,.12);
+    transition:transform .08s ease, box-shadow .08s ease;
+  }
+  .disclaimer-btn span:first-child{ color:var(--amber); font-size:.95rem; line-height:1; }
+  .disclaimer-btn:active{
+    transform:translateY(2px);
+    box-shadow:0 1px 0 var(--wood-dark), inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .disclaimer-btn:hover{ border-color:var(--amber-dim); }
+
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(10,8,6,.72);
+    backdrop-filter:blur(2px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:100;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .18s ease;
+  }
+  .modal-overlay.show{ opacity:1; pointer-events:auto; }
+
+  .modal-box{
+    position:relative;
+    width:100%;
+    max-width:560px;
+    max-height:min(80vh, 640px);
+    overflow-y:auto;
+    background:
+      linear-gradient(160deg, var(--wood-light) 0%, var(--wood) 45%, var(--wood-dark) 100%);
+    border-radius:16px;
+    padding:30px 26px 26px;
+    box-shadow:0 24px 50px var(--shadow-deep), inset 0 1px 0 rgba(255,255,255,.08);
+    transform:translateY(12px) scale(.98);
+    transition:transform .18s ease;
+  }
+  .modal-overlay.show .modal-box{ transform:translateY(0) scale(1); }
+
+  .modal-box h2{
+    font-family:'Bungee', sans-serif;
+    font-size:1.05rem;
+    line-height:1.4;
+    color:var(--amber);
+    margin:0 0 14px;
+    padding-right:26px;
+  }
+  .modal-body{
+    background:rgba(0,0,0,.28);
+    border-radius:10px;
+    padding:16px 16px;
+  }
+  .modal-body p{
+    margin:0 0 12px;
+    font-size:.88rem;
+    line-height:1.55;
+    color:var(--cream);
+  }
+  .modal-body p:last-child{ margin-bottom:0; }
+
+  .modal-close{
+    position:absolute;
+    top:14px; right:14px;
+    width:30px; height:30px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    font-size:.95rem;
+    color:var(--cream);
+    background:rgba(0,0,0,.35);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{ background:rgba(0,0,0,.5); }
+
+  /* ================= RESPONSIVE ================= */
+
   @media (max-width:640px){
+    .room{ padding:66px 16px 110px; }
+
     .tv-body{ flex-direction:column; }
+
     .control-panel{
-      flex-direction:row;
+      flex-direction:column;
       flex:0 0 auto;
       width:100%;
-      justify-content:space-between;
+      gap:12px;
+      padding:12px 4px 4px;
     }
-    .btn-group{ flex-direction:row; flex:1; }
-    .playback-group{ flex:1; }
-    .led-display{ width:auto; flex:0 0 90px; }
+
+    .led-display{ width:100%; padding:8px 10px; }
+    .led-number{ font-size:1.8rem; }
+
+    .btn-group{
+      flex-direction:row;
+      width:100%;
+      gap:10px;
+    }
+    .chan-btn{ padding:13px 0; font-size:.95rem; }
+
+    .playback-group{ width:100%; gap:10px; }
+    .play-btn{ padding:13px 0; font-size:1rem; }
+
+    .aux-group{
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      width:100%;
+    }
+    .mute-btn{ width:50px; height:50px; font-size:1.25rem; }
+    .power-btn{ width:58px; height:58px; font-size:1.35rem; }
+
+    .cabinet{ padding:16px 14px 20px; }
+    .tv-body{ gap:14px; }
+
+    .guide{ margin-top:40px; }
+
+    .guide-row{ gap:10px; padding:10px 12px; }
+    .guide-num{ width:26px; font-size:1.3rem; }
+    .guide-thumb{ width:50px; height:38px; }
+    .guide-title-text{
+      white-space:normal;
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp:1;
+      -webkit-box-orient:vertical;
+      font-size:.88rem;
+    }
+    .guide-sub{ font-size:.7rem; }
+    .on-air-badge{ font-size:.58rem; padding:4px 7px; letter-spacing:.06em; }
+
+    .disclaimer-btn{ top:10px; right:10px; padding:7px 11px; font-size:.65rem; }
+  }
+
+  @media (max-width:400px){
+    .room{ padding:60px 10px 100px; }
+    .wordmark{ letter-spacing:0; }
+
+    .cabinet{ padding:14px 10px 18px; }
+
+    .btn-group, .playback-group{ gap:8px; }
+    .chan-btn{ font-size:.85rem; padding:12px 0; }
+    .play-btn{ font-size:.9rem; padding:12px 0; }
+
+    .aux-group{ gap:12px; }
+    .mute-btn{ width:46px; height:46px; font-size:1.1rem; }
+    .power-btn{ width:52px; height:52px; font-size:1.2rem; }
+
+    .guide-thumb{ display:none; }
+    .guide-num{ width:22px; font-size:1.15rem; }
+    .guide-row{ padding:10px; gap:8px; }
+    .on-air-badge{ font-size:.55rem; padding:3px 6px; }
+
+    .disclaimer-btn-text{ display:none; }
+    .disclaimer-btn{ padding:8px; border-radius:50%; width:32px; height:32px; justify-content:center; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -540,6 +704,23 @@
 </style>
 </head>
 <body>
+
+<button type="button" class="disclaimer-btn" id="disclaimerBtn" aria-haspopup="dialog" aria-controls="disclaimerOverlay" aria-label="Show fair use disclaimer">
+  <span aria-hidden="true">ⓘ</span><span class="disclaimer-btn-text">Disclaimer</span>
+</button>
+
+<div class="modal-overlay" id="disclaimerOverlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle" id="disclaimerBox">
+    <button type="button" class="modal-close" id="disclaimerClose" aria-label="Close disclaimer">✕</button>
+    <h2 id="disclaimerTitle">Fair Use &amp; Content Disclaimer</h2>
+    <div class="modal-body">
+      <p>This site is a non-commercial fan project built for nostalgia. It does not host, store, upload, or distribute any video files on its own servers — every "channel" here simply loads publicly available videos directly from YouTube through YouTube's own embedded player, in real time.</p>
+      <p>All show titles, characters, clips, and thumbnails remain the property of their original creators, broadcasters, and rights holders. This project is not affiliated with, endorsed by, or sponsored by any of them.</p>
+      <p>Nothing shown here is downloaded, re-encoded, copied, or made available for download. If a video is ever removed or made private by its uploader, it simply stops playing here too, exactly as it would on YouTube itself.</p>
+      <p>This project intends to operate under fair use principles — for commentary, nostalgia, and archival-style scheduling of publicly posted content — with no unfair or deceptive means used to access, obtain, or redistribute anything. If you are a rights holder with a concern about a specific video, the appropriate remedy is with the video on YouTube directly, since that is the only place the content actually lives.</p>
+    </div>
+  </div>
+</div>
 
 <div class="room">
 
@@ -601,7 +782,7 @@
             <button class="play-btn" id="skipFwd" aria-label="Skip forward 10 seconds" title="+10s">⏩</button>
           </div>
 
-          <div style="display:flex; gap:8px;">
+          <div class="aux-group">
             <button class="mute-btn" id="muteBtn" aria-label="Toggle mute" title="Mute / unmute">🔊</button>
             <button class="power-btn" id="powerBtn" aria-label="Toggle power" title="Power">
               <span class="power-ring" aria-hidden="true"></span>
@@ -671,8 +852,51 @@
         { videoId: 'Hv-ibS9TKqI', duration: 2625 },   // 0:43:45
       ]
     },
-    { id: 3, name: null, videos: [] },
-    { id: 4, name: null, videos: [] },
+    {
+      id: 3,
+      name: 'The Daltons — Hindi',
+      videos: [
+        { videoId: '1Ke29R-tn2s', duration: 3912 },  // 1:05:12
+        { videoId: 'vXkrRC7El-U', duration: 3916 },  // 1:05:16
+        { videoId: '3oQeng2v6ik', duration: 3934 },  // 1:05:34
+        { videoId: 'fYX6oZyfEcw', duration: 4869 },  // 1:21:09
+        { videoId: 'D8Td3yFBHSQ', duration: 3928 },  // 1:05:28
+        { videoId: 's74SJUWiuIg', duration: 7830 },  // 2:10:30
+        { videoId: 'HgVGKXjZ4BM', duration: 3150 },  // 0:52:30
+      ]
+    },
+    {
+      id: 4,
+      name: 'Krish, Trish and Baltiboy — Hindi',
+      videos: [
+        { videoId: 'edH-lLkBSiI', duration: 3281 },  // 0:54:41
+        { videoId: 'eEacL0RZCrg', duration: 3488 },  // 0:58:08
+        { videoId: 'qRz-Gg1ODuE', duration: 3595 },  // 0:59:55
+        { videoId: 'RrwbI0SCab0', duration: 3595 },  // 0:59:55
+        { videoId: 'dSL3KFhwu20', duration: 3543 },  // 0:59:03
+        { videoId: 'ous27C2k32c', duration: 3606 },  // 1:00:06
+        { videoId: 'tTNEx17fu3k', duration: 3590 },  // 0:59:50
+        { videoId: 'sJYwDcs5glY', duration: 3599 },  // 0:59:59
+      ]
+    },
+    {
+      id: 5,
+      name: 'Keymon Ache — Hindi',
+      videos: [
+        { videoId: 'CbCuQdj8uAM', duration: 7573 },  // 2:06:13
+        { videoId: 'lz4d7a10s9o', duration: 7446 },  // 2:04:06
+        { videoId: 'EJ3PeWR_XX4', duration: 7211 },  // 2:00:11
+      ]
+    },
+    {
+      id: 6,
+      name: 'Pakdam Pakdai — Hindi',
+      videos: [
+        { videoId: 'ZMzsg5ALVL4', duration: 7623 },  // 2:07:03
+        { videoId: '7WBhFztXrEs', duration: 8259 },  // 2:17:39
+        { videoId: 'jseRShjo7Yc', duration: 7589 },  // 2:06:29
+      ]
+    },
   ];
 
   /* A fixed instant in time that the very first episode of each
@@ -1087,6 +1311,33 @@
       }
     });
   };
+
+  /* ---------------- disclaimer modal ---------------- */
+  const disclaimerBtn = document.getElementById('disclaimerBtn');
+  const disclaimerOverlay = document.getElementById('disclaimerOverlay');
+  const disclaimerClose = document.getElementById('disclaimerClose');
+  let lastFocused = null;
+
+  function openDisclaimer(){
+    lastFocused = document.activeElement;
+    disclaimerOverlay.classList.add('show');
+    disclaimerClose.focus();
+    document.addEventListener('keydown', onDisclaimerKeydown);
+  }
+  function closeDisclaimer(){
+    disclaimerOverlay.classList.remove('show');
+    document.removeEventListener('keydown', onDisclaimerKeydown);
+    if(lastFocused && lastFocused.focus) lastFocused.focus();
+  }
+  function onDisclaimerKeydown(e){
+    if(e.key === 'Escape') closeDisclaimer();
+  }
+
+  disclaimerBtn.addEventListener('click', openDisclaimer);
+  disclaimerClose.addEventListener('click', closeDisclaimer);
+  disclaimerOverlay.addEventListener('click', (e) => {
+    if(e.target === disclaimerOverlay) closeDisclaimer();
+  });
 
   /* ---------------- init ---------------- */
   renderGuide();
